@@ -8,7 +8,7 @@ O labirinto pe composto de:
 - \# representando paredes, aonde o personagem não pode caminhar;
 - \* representando perigos, aonde o personagem perde uma vida.
 # Logica
-No começo do programa o código lê as matrizes do arquivo "input.data" presente na pasta dataset. A codificação do arquivo deve ser a seguinte:
+No começo do programa o código pergunta se o arquivo está pronto, caso sim, ele lê as matrizes do arquivo "input.data" presente na pasta dataset, caso não ele pergunta o tamanho das matrizes, a quantidade de matrizes, e o número máximo de items em uma casa, e com isso gera o arquivo "input.data" (*Matriz::GeraMatriz()*). A codificação do arquivo deve ser a seguinte:
 > tam_matriz tam_matriz qtd_matrizes  
 > num num num  
 > num num num  
@@ -45,6 +45,7 @@ Por fim, é feita a exibição de dados utéis da execução, como casas percorr
 Obs.:    
 - O arquivo deve ser dado na mesma maneira que o apresentado.
 - O arquivo não deve possuir números negativos.
+- As matrizes devem ser quadradas.
 
 # Exemplo de execução
 Arquivo:
