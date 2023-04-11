@@ -40,7 +40,7 @@ Quando o personagem cai numa nova matriz, o programa garante que ele não caia e
 
 Caso o personagem morra no meio do caminho, ou caso no início do while de percorrer, as váriáveis caminhoEZero, passouNasMatrizes sejam verdadeiras, a matrizAtual seja 1, e posiçãoInicial seja igual à posiçãoAtual.
 
-Por fim, é feita a exibição de dados utéis da execução, como casas percorridas, items consumidos, perigos encontrados e casas não exploradas. Assim como é feito um arquivo "resultado.data" presente na pasta dataset que possui a relação de paredes (=), casas percorridas (1) e casas não percorridas (0).
+Por fim, é feita a exibição de dados utéis da execução, como casas percorridas, items consumidos, perigos encontrados e casas não exploradas. Assim como é feito um arquivo "percorridas.data" presente na pasta dataset que possui a relação de paredes (=), casas percorridas (1) e casas não percorridas (0).
 
 Obs.:    
 - O arquivo deve ser dado na mesma maneira que o apresentado.

@@ -46,9 +46,9 @@ void Matriz::GeraMatriz(){
 }
 
 void Matriz::PreencheArquivos(){
-    char opcao = 'N'; string aux;
-    cout<<"O arquivo input.data está preenchido? (S/N)"<<endl;
-    cin>>opcao;
+    char opcao = 'S'; string aux;
+    // cout<<"O arquivo input.data está preenchido? (S/N)"<<endl;
+    // cin>>opcao;
     if(opcao=='N'){
         cout << "Qual o tamanho das matrizes?" <<endl;
         cin >> this->tamanho;

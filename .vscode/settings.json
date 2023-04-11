@@ -6,7 +6,10 @@
         "utility": "cpp",
         "chrono": "cpp",
         "span": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "iosfwd": "cpp",
+        "string": "cpp",
+        "xmemory": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

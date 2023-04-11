@@ -1,6 +1,6 @@
 #include "labirinto.hpp"
 int main(){
-    srand(42);
+    srand(time(0));
     Labirinto Labirinto;
     Labirinto.StartQuest();
     Labirinto.ReviewQuest();

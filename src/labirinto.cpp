@@ -83,22 +83,22 @@ void Labirinto::ReviewQuest(){
     cout<<"Foram percorridas "<< this->contCasas << " casas."<<endl;
     cout<<"Foram consumidos "<< this->Couto.getSacola() << " items."<<endl;
     cout<<"Foram encontrados "<< this->contPerigos << " perigos."<<endl;
-    char inputData;
-    ofstream resultado("dataset/resultado.data");
+    string inputData, inputBoolData;
+    ofstream resultado("dataset/percorridas.data");
     for (int k = 0; k < this->getQtdMatriz(); k++)
     {
         ifstream input("dataset/Matriz"+to_string(k+1)+".data");
+        ifstream inputBool("dataset/MatrizBool"+to_string(k+1)+".data");
         for (int i = 0; i < this->getTamanho(); i++)
         {
             for (int j = 0; j < this->getTamanho(); j++)
             {
                 input >> inputData;
-                if(inputData=='#'){
-                    input >> inputData;
+                inputBool >> inputBoolData;
+                if(inputData=="#"){
                     resultado << '=' << ' ';
                 }else{
-                    input >> inputData;
-                    if(inputData=='0'){
+                    if(inputBoolData=="0"){
                         resultado << '0';
                         contCasasNaoPercorridas++;
                     }else resultado<<'1';
@@ -108,8 +108,24 @@ void Labirinto::ReviewQuest(){
             resultado << '\n';
         }
         resultado << '\n';
+        input.close();
+        inputBool.close();
     }
+    resultado.close();
+    ofstream output("dataset/output.data");
     cout<<"Não foram exploradas "<< contCasasNaoPercorridas << " casas."<<endl;
+    for (int k = 0; k < this->getQtdMatriz(); k++)
+    {
+        ifstream input("dataset/Matriz"+to_string(k+1)+".data");
+        output << input.rdbuf() << '\n';
+        input.close();
+    }
+    for (int k = 0; k < this->getQtdMatriz(); k++)
+    {
+        remove(("dataset/Matriz"+to_string(k+1)+".data").c_str());
+        remove(("dataset/MatrizBool"+to_string(k+1)+".data").c_str());
+    }
+    output.close();
     
 }
 
@@ -143,6 +159,7 @@ bool Labirinto::AndaMatriz(pair<int,int>* posicaoAtual, int linha, int coluna){
 void Labirinto::PreencheMatriz(int matriz,pair<int,int>* posicaoAtual, bool passouNasMartrizesUmaVez){
     string temp;
     ifstream arquivo("dataset/Matriz"+to_string(matriz)+".data");
+    ifstream arquivoBool("dataset/MatrizBool"+to_string(matriz)+".data");
     if (arquivo.is_open())
     {
         for (int i = 0; i < this->getTamanho(); i++)
@@ -153,17 +170,15 @@ void Labirinto::PreencheMatriz(int matriz,pair<int,int>* posicaoAtual, bool pass
                 else if (temp=="*") this->matriz[i][j].first=-2;
                 else this->matriz[i][j].first=stoi(temp);
                 if(!passouNasMartrizesUmaVez) this->matriz[i][j].second=false;
-                else arquivo >> this->matriz[i][j].second;
+                else arquivoBool >> this->matriz[i][j].second;
             }
         }
-        if (posicaoAtual!=nullptr)
+        do
         {
-            do
-            {
-                (*posicaoAtual) = make_pair(rand() % this->getTamanho(), rand() % this->getTamanho());
-            } while (this->matriz[(*posicaoAtual).first][(*posicaoAtual).second].first==-1);
-        }
+            (*posicaoAtual) = make_pair(rand() % this->getTamanho(), rand() % this->getTamanho());
+        } while (this->matriz[(*posicaoAtual).first][(*posicaoAtual).second].first==-1);
         arquivo.close();
+        arquivoBool.close();
     }
     else
     {
@@ -174,6 +189,7 @@ void Labirinto::PreencheMatriz(int matriz,pair<int,int>* posicaoAtual, bool pass
 
 void Labirinto::AtualizaMatriz(int matriz){
     ofstream arquivo("dataset/Matriz"+to_string(matriz)+".data");
+    ofstream arquivoBool("dataset/MatrizBool"+to_string(matriz)+".data");
     if (arquivo.is_open())
     {
         for (int i = 0; i < this->getTamanho(); i++)
@@ -183,11 +199,13 @@ void Labirinto::AtualizaMatriz(int matriz){
                 else if (this->matriz[i][j].first==-2) arquivo << '*';
                 else arquivo << this->matriz[i][j].first;
                 arquivo << ' ';
-                this->matriz[i][j].second>0?arquivo <<1<<' ':arquivo <<0<<' ';
+                this->matriz[i][j].second>0?arquivoBool <<1<<' ':arquivoBool <<0<<' ';
             }
             arquivo<<'\n';
+            arquivoBool<<'\n';
         }
         arquivo.close();
+        arquivoBool.close();
     }
     else
     {
